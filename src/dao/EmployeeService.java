@@ -1,3 +1,7 @@
+package dao;
+
+import db.ConnectionDB;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -5,7 +9,7 @@ import java.sql.SQLException;
 
 // DB 쿼리 수행
 public class EmployeeService {
-    // DB 연결 (ConnectionDB 호출)
+    // DB 연결 (db.ConnectionDB 호출)
     private Connection connection;
     public EmployeeService() {
         try {

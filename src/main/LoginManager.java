@@ -1,3 +1,7 @@
+package main;
+
+import dao.EmployeeService;
+
 import java.util.Scanner;
 
 // 사용자 로그인 (메인)
@@ -11,7 +15,7 @@ public class LoginManager {
             System.out.print("PW : ");
             String pw = sc.nextLine().trim();
 
-            // 로그인 여부 확인하는 EmployeeService 객체 생성
+            // 로그인 여부 확인하는 dao.EmployeeService 객체 생성
             EmployeeService employeeService = new EmployeeService();
             // login(id, pw) 호출 및 결과 확인
             String LoginUserName = employeeService.loginCheck(id, pw);
