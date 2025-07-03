@@ -10,7 +10,7 @@ public class ConnectionDB {
     private static final String PASSWORD = "pos12345";
 
     // connection으로 연결
-    public static Connection ConnectionDB() throws SQLException {
+    public static Connection getConnectionDB() throws SQLException {
         try {
             Class.forName("oracle.jdbc.OracleDriver");
         } catch (ClassNotFoundException e) {
