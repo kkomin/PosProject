@@ -12,12 +12,26 @@ import java.time.LocalDateTime;
 public class LoginLog {
     // DB 연결 - ConnectionDB
     private Connection connection;
+    // sql 생성
+    private final String insertSql = """
+            INSERT INTO LOGIN_LOGS(EMP_ID, LOGIN_TIME)
+            VALUES (?, ?)
+            """;
 
     public LoginLog() {
         try {
             connection = ConnectionDB.getConnectionDB();
         } catch (SQLException e) {
             System.out.println("DB 연결 오류" + e.getMessage());
+        }
+    }
+
+    // 로그인 시 loginmanager에서 받아온 값 insert -> empid, localdatetime
+    public void SaveLoginLog(int empid, LocalDateTime time) {
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement(insertSql);
+        } catch (SQLException e) {
+            System.out.println("SQL 문구 오류" + e.getMessage());
         }
     }
 
