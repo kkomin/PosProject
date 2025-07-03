@@ -5,7 +5,6 @@ import java.sql.SQLException;
 
 // DB 쿼리 수행
 public class EmployeeService {
-    private boolean check = false;
     // DB 연결 (ConnectionDB 호출)
     private Connection connection;
     public EmployeeService() {
@@ -31,7 +30,7 @@ public class EmployeeService {
             // ResultSet의 결과 확인
             final ResultSet resultSet = preparedStatement.executeQuery();
             // 결과로 존재 여부 확인
-            return check = resultSet.next();
+            return resultSet.next();
         } catch (SQLException e) {
             System.out.println("쿼리 오류 발생" + e.getMessage());
             throw new RuntimeException(e);
