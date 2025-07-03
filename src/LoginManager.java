@@ -5,6 +5,10 @@ public class LoginManager {
     public static void main(String[] args) {
         // Scanner로 id, pw 입력 받기
         Scanner sc = new Scanner(System.in);
+        String id = sc.nextLine();
+        String pw = sc.nextLine();
+        System.out.print("ID : " + id);
+        System.out.print("PW : " + pw);
 
         // 로그인 여부 확인하는 EmployeeService 객체 생성
 
