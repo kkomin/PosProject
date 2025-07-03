@@ -5,6 +5,7 @@ import db.ConnectionDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 // login_logs 테이블 db 작업용
@@ -30,6 +31,12 @@ public class LoginLog {
     public void SaveLoginLog(int empid, LocalDateTime time) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insertSql);
+            // 파라미터 바인딩
+            preparedStatement.setInt(1, empid);
+            preparedStatement.setTimestamp(2, Timestamp.valueOf(time));     // timestamp로 변환 후 바인딩
+
+            preparedStatement.executeQuery();
+
         } catch (SQLException e) {
             System.out.println("SQL 문구 오류" + e.getMessage());
         }
