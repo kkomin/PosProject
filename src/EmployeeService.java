@@ -21,7 +21,8 @@ public class EmployeeService {
             SELECT * FROM EMPLOYEES WHERE USER_ID = ? AND USER_PW = ?
             """;
 
-    public boolean loginCheck(String userId, String userPw) {
+    public String loginCheck(String userId, String userPw) {
+        String userName = null;
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             // PreparedStatement로 파라미터 바인딩
@@ -30,10 +31,12 @@ public class EmployeeService {
             // ResultSet의 결과 확인
             final ResultSet resultSet = preparedStatement.executeQuery();
             // 결과로 존재 여부 확인
-            return resultSet.next();
+            if (resultSet.next()) {
+                userName = resultSet.getString("USER_NAME");
+            }
         } catch (SQLException e) {
             System.out.println("쿼리 오류 발생" + e.getMessage());
-            throw new RuntimeException(e);
         }
+        return userName;
     }
 }

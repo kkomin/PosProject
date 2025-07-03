@@ -14,10 +14,12 @@ public class LoginManager {
             // 로그인 여부 확인하는 EmployeeService 객체 생성
             EmployeeService employeeService = new EmployeeService();
             // login(id, pw) 호출 및 결과 확인
-            boolean isLogin = employeeService.loginCheck(id, pw);
+            String LoginUserName = employeeService.loginCheck(id, pw);
+
             // 로그인 성공 여부에 따른 메세지 출력
-            if(isLogin) {
+            if(LoginUserName != null) {
                 System.out.println("로그인 성공!");
+                System.out.printf("사원 %s 님, 안녕하세요", LoginUserName);
                 break;
             }
             else {
