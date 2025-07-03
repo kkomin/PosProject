@@ -17,12 +17,12 @@ public class EmployeeService {
         System.out.println("DB 연결 오류 발생");
     }
 
-
-    public boolean loginCheck(String empId, String empPw) {
+    public boolean loginCheck(int empId, String empPw) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             // PreparedStatement로 파라미터 바인딩
-
+            preparedStatement.setInt(1, empId);
+            preparedStatement.setString(2, empPw);
             // ResultSet의 결과 확인
             final ResultSet resultSet = preparedStatement.executeQuery();
             // 결과로 존재 여부 확인
