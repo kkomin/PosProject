@@ -28,11 +28,11 @@ public class LoginLog {
     }
 
     // 로그인 시 loginmanager에서 받아온 값 insert -> empid, localdatetime
-    public void SaveLoginLog(int empid, LocalDateTime time) {
+    public int SaveLoginLog(int empId, LocalDateTime time) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(insertSql);
             // 파라미터 바인딩
-            preparedStatement.setInt(1, empid);
+            preparedStatement.setInt(1, empId);
             preparedStatement.setTimestamp(2, Timestamp.valueOf(time));     // timestamp로 변환 후 바인딩
 
             preparedStatement.executeQuery();
@@ -40,8 +40,6 @@ public class LoginLog {
         } catch (SQLException e) {
             System.out.println("SQL 문구 오류" + e.getMessage());
         }
+        return empId;
     }
-
-    // update
-
 }

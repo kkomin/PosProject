@@ -26,14 +26,17 @@ public class LoginManager {
             if(loginUser != null) {
                 System.out.println("로그인 성공!");
                 System.out.printf("사원 %s 님, 안녕하세요", loginUser.getUserName());
-                // 로그인 성공 시 사원 정보 (id, name, 로그인 date, time 전달)
-                // 1. loginuser 객체 생성 <- 로그인 정보 + loginTime + emp_id 저장
 
-
-                LocalDateTime currentDateTime = LocalDateTime.now();
+                // DB에 출근 기록 저장 + log_id 변환 -> loginUser 저장
                 LoginLog loginLog = new LoginLog();
-//                loginLog.SaveLoginLog(, currentDateTime);
-                // 2. 호출 -> DB에 출근 기록 저장 + log_id 변환 -> loginUser 저장
+                int logId = loginLog.SaveLoginLog(loginUser.getEmpId(), loginUser.getLoginTime());
+                // 로그인한 기록 id를 loginUser에 저장 -> 퇴근 시 활용
+                loginUser.setLoginLogsId(logId);
+
+                System.out.println("현재 시간은 " + loginUser.getLoginTime());
+
+
+                // 로그인 반복문 종료
                 break;
             }
             else {
