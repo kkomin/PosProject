@@ -43,6 +43,7 @@ public class EmployeeService {
 
                 LocalDateTime loginTime = LocalDateTime.now();
 
+                // 추후 로그인할 log_id를 loginuser 객체에 추가해주는 로직 필요
                 return new LoginUser(emp_id, userId, userName, hourlyWage, loginTime, 0);
             }
         } catch (SQLException e) {

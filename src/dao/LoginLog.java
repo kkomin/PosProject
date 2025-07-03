@@ -15,8 +15,8 @@ public class LoginLog {
     private Connection connection;
     // sql 생성
     private final String insertSql = """
-            INSERT INTO LOGIN_LOGS(EMP_ID, LOGIN_TIME)
-            VALUES (?, ?)
+            INSERT INTO LOGIN_LOGS(LOG_ID, EMP_ID, LOGIN_TIME)
+            VALUES (login_logs_seq.NEXTVAL, ?, ?)
             """;
 
     public LoginLog() {
@@ -35,7 +35,7 @@ public class LoginLog {
             preparedStatement.setInt(1, empId);
             preparedStatement.setTimestamp(2, Timestamp.valueOf(time));     // timestamp로 변환 후 바인딩
 
-            preparedStatement.executeQuery();
+            preparedStatement.executeUpdate();
 
         } catch (SQLException e) {
             System.out.println("SQL 문구 오류" + e.getMessage());
