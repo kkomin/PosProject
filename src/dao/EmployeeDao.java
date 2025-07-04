@@ -23,7 +23,7 @@ public class EmployeeDao {
 
     // 쿼리 작성 employees의 id -> ?, pw -> ?
     // select * from employees where user_id = ? and user_pw = ?;
-    private final String sql = """
+    public final String sql = """
             SELECT * FROM EMPLOYEES WHERE USER_ID = ? AND USER_PW = ?
             """;
 

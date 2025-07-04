@@ -14,7 +14,7 @@ public class LoginLogDao {
     // DB 연결 - ConnectionDB
     private Connection connection;
     // sql 생성
-    private final String insertSql = """
+    public final String insertSql = """
             INSERT INTO LOGIN_LOGS(LOG_ID, EMP_ID, LOGIN_TIME)
             VALUES (login_logs_seq.NEXTVAL, ?, ?)
             """;
