@@ -69,7 +69,7 @@ public class ProductRegister {
         // prod_id 값은 임시로 설정
         Product product = new Product(name, company, expiration, isAdult, price, stock);
         ProductDAO productDAO = new ProductDAO();
-        productDAO.RegisterProduct(
+        productDAO.registerProduct(
                 product.getProdName(),
                 product.getCompany(),
                 product.getExpiration(),

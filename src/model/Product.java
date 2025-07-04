@@ -5,12 +5,12 @@ import java.sql.Date;
 // 제품 정보 객체
 public class Product {
     private int prodId;
-    private String prodName;
-    private String company;
-    private Date expiration;
-    private boolean isAdult;
-    private int price;
-    private int stock;
+    private final String prodName;
+    private final String company;
+    private final Date expiration;
+    private final boolean isAdult;
+    private final int price;
+    private final int stock;
 
 
     // 제품 정보 등록 생성자

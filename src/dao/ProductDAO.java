@@ -28,7 +28,7 @@ public class ProductDAO {
         }
     }
 
-    public void RegisterProduct(String name, String company, Date expiration, Boolean isAdult, int price, int stock) {
+    public void registerProduct(String name, String company, Date expiration, Boolean isAdult, int price, int stock) {
         PreparedStatement preparedStatement;
         try {
             preparedStatement = connection.prepareStatement(insertProduct);
