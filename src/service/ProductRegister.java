@@ -21,8 +21,17 @@ public class ProductRegister {
         String adult = sc.nextLine().trim();
 
         // 성인 여부 입력 시 true, false로 변경
-        boolean isAdult = false;
-        isAdult = Objects.equals(adult, "y") | Objects.equals(adult, "Y");
+        boolean isAdult;
+        if(adult.equals("y") || adult.equals("Y")) {
+            isAdult = true;
+        }
+        else if (adult.equals("n") || adult.equals("N")) {
+            isAdult = false;
+        }
+        else {
+            System.out.println("잘못된 입력입니다.\n");
+            return;
+        }
 
         System.out.print("가격 : ");
         int price = sc.nextInt();
