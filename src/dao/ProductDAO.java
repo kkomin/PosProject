@@ -29,9 +29,8 @@ public class ProductDAO {
     }
 
     public void registerProduct(String name, String company, Date expiration, Boolean isAdult, int price, int stock) {
-        PreparedStatement preparedStatement;
-        try {
-            preparedStatement = connection.prepareStatement(insertProduct);
+        // PreparedStatement 자동으로 닫기
+        try (PreparedStatement preparedStatement = connection.prepareStatement(insertProduct)) {
             // 파라미터 바인딩
             preparedStatement.setString(1, name);
             preparedStatement.setString(2, company);
@@ -52,5 +51,4 @@ public class ProductDAO {
             throw new RuntimeException(e);
         }
     }
-
 }
