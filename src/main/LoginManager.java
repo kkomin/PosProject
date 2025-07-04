@@ -5,7 +5,6 @@ import dao.LoginLog;
 import model.LoginUser;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 // 사용자 로그인 (메인)
