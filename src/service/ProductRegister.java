@@ -46,9 +46,15 @@ public class ProductRegister {
 
         System.out.print("가격 : ");
         int price = sc.nextInt();
-        // 수량은 최소 10개 입력받는 예외처리 필요
+
+        // 수량은 최소 10개 입력받는 예외처리
         System.out.print("수량 :");
         int stock = sc.nextInt();
+
+        if(stock < 10) {
+            System.out.println("수량은 최소 10개 이상 입력해주세요.\n");
+            return;
+        }
 
         // 입력값을 기반으로 Product 객체 생성
         // prod_id 값은 임시로 설정
