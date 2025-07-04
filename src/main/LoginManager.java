@@ -1,8 +1,9 @@
 package main;
 
-import dao.EmployeeDao;
-import dao.LoginLogDao;
+import dao.EmployeeDAO;
+import dao.LoginLogDAO;
 import model.LoginUser;
+import service.EmployeeService;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -19,7 +20,7 @@ public class LoginManager {
             String pw = sc.nextLine().trim();
 
             // 로그인 여부 확인하는 dao.EmployeeService 객체 생성
-            EmployeeDao employeeDao = new EmployeeDao();
+            EmployeeDAO employeeDao = new EmployeeDAO();
             LoginUser loginUser = employeeDao.loginCheck(id, pw);
 
             // 로그인 성공 여부에 따른 메세지 출력
@@ -28,7 +29,7 @@ public class LoginManager {
                 System.out.printf("사원 %s 님, 안녕하세요\n", loginUser.getUserName());
 
                 // DB에 출근 기록 저장 + log_id 변환 -> loginUser 저장
-                LoginLogDao loginLogDao = new LoginLogDao();
+                LoginLogDAO loginLogDao = new LoginLogDAO();
 
                 // 시간 저장 시 나노 단위 제거
                 int logId = loginLogDao.SaveLoginLog(loginUser.getEmpId(), loginUser.getLoginTime());
@@ -37,10 +38,10 @@ public class LoginManager {
 
                 // 시간은 초까지만 저장
                 loginUser.setLoginTime(LocalDateTime.now().withNano(0));
-                System.out.println("현재 시간은 " + loginUser.getLoginTime());
-
+                System.out.printf("출근 시간 : %s\n", loginUser.getLoginTime());
 
                 // 로그인 반복문 종료
+                EmployeeService.showMenu();
                 break;
             }
             else {

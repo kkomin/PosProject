@@ -10,10 +10,10 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 // DB 쿼리 수행
-public class EmployeeDao {
+public class EmployeeDAO {
     // DB 연결 (db.ConnectionDB 호출)
     private Connection connection;
-    public EmployeeDao() {
+    public EmployeeDAO() {
         try {
             connection = ConnectionDB.getConnectionDB();
         } catch (SQLException e) {
@@ -42,9 +42,11 @@ public class EmployeeDao {
                 int hourlyWage = resultSet.getInt("HOURLY_WAGE");
 
                 LocalDateTime loginTime = LocalDateTime.now();
+                LoginLogDAO loginLogDAO = new LoginLogDAO();
+                int logId = loginLogDAO.SaveLoginLog(emp_id, loginTime);
 
                 // 추후 로그인할 log_id를 loginuser 객체에 추가해주는 로직 필요
-                return new LoginUser(emp_id, userId, userName, hourlyWage, loginTime, 0);
+                return new LoginUser(emp_id, userId, userName, hourlyWage, loginTime, logId);
             }
         } catch (SQLException e) {
             System.out.println("쿼리 오류 발생" + e.getMessage());
