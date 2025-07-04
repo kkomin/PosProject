@@ -8,13 +8,13 @@ public class Product {
     private final String prodName;
     private final String company;
     private final Date expiration;
-    private final boolean isAdult;
+    private final Character isAdult;
     private final int price;
     private final int stock;
 
 
     // 제품 정보 등록 생성자
-    public Product(String prodName, String company, Date expiration, boolean isAdult, int price, int stock) {
+    public Product(String prodName, String company, Date expiration, Character isAdult, int price, int stock) {
         this.prodName = prodName;
         this.company = company;
         this.expiration = expiration;
@@ -35,7 +35,7 @@ public class Product {
         return expiration;
     }
 
-    public boolean isAdult() {
+    public Character isAdult() {
         return isAdult;
     }
 
