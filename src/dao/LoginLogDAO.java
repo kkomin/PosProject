@@ -31,9 +31,9 @@ public class LoginLogDAO {
     }
 
     // 로그인 시 loginmanager에서 받아온 값 insert -> empid, localdatetime
+    // 값 insert
     public int SaveLoginLog(int empId, LocalDateTime time) {
         try {
-            // 값 insert
             PreparedStatement preparedStatement = connection.prepareStatement(insertSql);
             // 파라미터 바인딩
             preparedStatement.setInt(1, empId);
@@ -44,16 +44,13 @@ public class LoginLogDAO {
             // id 값 조회
             PreparedStatement pres = connection.prepareStatement(getIdSql);
             ResultSet resultSet = pres.executeQuery();
-
             // id 값이 존재하면
             if(resultSet.next()) {
                 // 첫번째 컬럼 값 추출
                 return resultSet.getInt(1);
             }
-
-
         } catch (SQLException e) {
-            System.out.println("SQL 문구 오류" + e.getMessage());
+            System.out.println("오류" + e.getMessage());
         }
         return -1;
     }
