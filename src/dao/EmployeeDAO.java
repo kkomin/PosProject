@@ -10,10 +10,10 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 // DB 쿼리 수행
-public class EmployeeDao {
+public class EmployeeDAO {
     // DB 연결 (db.ConnectionDB 호출)
     private Connection connection;
-    public EmployeeDao() {
+    public EmployeeDAO() {
         try {
             connection = ConnectionDB.getConnectionDB();
         } catch (SQLException e) {
