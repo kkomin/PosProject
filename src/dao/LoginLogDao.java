@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 
 // login_logs 테이블 db 작업용
 // 로그인 시간 기록, 로그아웃(종료) 시간 업데이트, 근무시간 계산
-public class LoginLog {
+public class LoginLogDao {
     // DB 연결 - ConnectionDB
     private Connection connection;
     // sql 생성
@@ -19,7 +19,7 @@ public class LoginLog {
             VALUES (login_logs_seq.NEXTVAL, ?, ?)
             """;
 
-    public LoginLog() {
+    public LoginLogDao() {
         try {
             connection = ConnectionDB.getConnectionDB();
         } catch (SQLException e) {
