@@ -13,6 +13,9 @@ public class ProductDAO {
             """;
 
     // 등록한 제품 prod_id 받아오는 sql
+//    public final String getProduct = """
+//            SELECT PROD_ID_SEQ.CURRVAL FROM DUAL
+//            """;
 
     private Connection connection;
 
@@ -37,13 +40,28 @@ public class ProductDAO {
 
             int result = preparedStatement.executeUpdate();
 
-            if (result > 0) {
+            if(result > 0) {
                 System.out.println("제품 등록 완료!\n");
-            } else {
+            }
+            else {
                 System.out.println("제품 등록 실패...\n");
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+
+//    public int getProductId() {
+//        try (PreparedStatement preparedStatement = connection.prepareStatement(getProduct)) {
+//            ResultSet resultSet = preparedStatement.executeQuery();
+//
+//            if(resultSet.next()) {
+//                return resultSet.getInt(1);
+//            }
+//
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//        return -1;
+//    }
 }
