@@ -16,7 +16,7 @@ public class EmployeeService {
             System.out.println("0. 퇴근");
             System.out.print("선택 : ");
 
-            int input = 0;
+            int input;
             try {
                 input = sc.nextInt();
                 switch (input) {
@@ -43,13 +43,11 @@ public class EmployeeService {
                         // 퇴근 (일급 계산) 메서드 호출
                         break;
                     default:
-                        System.out.println("잘못 입력하셨습니다.");
-                        continue;
+                        System.out.println("잘못 입력하셨습니다.\n");
                 }
             } catch (Exception e) {
                 System.out.println("숫자를 입력하세요\n");
             }
-            System.out.println(input);
         }
     }
 }
