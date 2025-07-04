@@ -1,5 +1,6 @@
 package service;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 // 제품 등록
@@ -11,13 +12,18 @@ public class ProductRegister {
         System.out.println("제품 입력");
         System.out.println("=========================");
         System.out.print("제품명 : ");
-        String name = sc.nextLine();
+        String name = sc.nextLine().trim();
         System.out.print("제조사 : ");
-        String company = sc.nextLine();
+        String company = sc.nextLine().trim();
         System.out.print("유통기한 (년,월,일) : ");
-        String deadline = sc.nextLine();
+        String deadline = sc.nextLine().trim();
         System.out.print("19금 여부 (Y/N) : ");
-        String adult = sc.nextLine();
+        String adult = sc.nextLine().trim();
+
+        // 성인 여부 입력 시 true, false로 변경
+        boolean isAdult = false;
+        isAdult = Objects.equals(adult, "y") | Objects.equals(adult, "Y");
+
         System.out.print("가격 : ");
         int price = sc.nextInt();
         // 수량은 최소 10개 입력받는 예외처리 필요
