@@ -41,7 +41,7 @@ public class EmployeeService {
                         break;
                     case 0:
                         // 퇴근 (일급 계산) 메서드 호출
-                        break;
+                        return;
                     default:
                         System.out.println("잘못 입력하셨습니다.\n");
                 }
