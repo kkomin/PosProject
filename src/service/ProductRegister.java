@@ -20,13 +20,22 @@ public class ProductRegister {
         String name = sc.nextLine().trim();
         System.out.print("제조사 : ");
         String company = sc.nextLine().trim();
+
+        // 유통기한 입력 시 형식 오류 예외처리
         System.out.print("유통기한 (년,월,일) : ");
         String deadline = sc.nextLine().trim();
 
         // String 형태를 Date 형태로 형변환
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
-        LocalDate localDate = LocalDate.parse(deadline, formatter);
-        Date expiration = Date.valueOf(localDate);
+        Date expiration = null;
+        try {
+            LocalDate localDate = LocalDate.parse(deadline, formatter);
+            expiration = Date.valueOf(localDate);
+
+        } catch (Exception e) {
+            System.out.println("입력 형식이 올바르지 않습니다. (ex) 20250710)");
+        }
+
 
         System.out.print("19금 여부 (Y/N) : ");
         String adult = sc.nextLine().trim();
