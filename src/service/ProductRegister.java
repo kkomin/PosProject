@@ -1,6 +1,11 @@
 package service;
 
-import java.util.Objects;
+import dao.ProductDAO;
+import model.Product;
+
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 // 제품 등록
@@ -17,6 +22,12 @@ public class ProductRegister {
         String company = sc.nextLine().trim();
         System.out.print("유통기한 (년,월,일) : ");
         String deadline = sc.nextLine().trim();
+
+        // String 형태를 Date 형태로 형변환
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyyMMdd");
+        LocalDate localDate = LocalDate.parse(deadline, formatter);
+        Date expiration = Date.valueOf(localDate);
+
         System.out.print("19금 여부 (Y/N) : ");
         String adult = sc.nextLine().trim();
 
@@ -40,5 +51,15 @@ public class ProductRegister {
         int stock = sc.nextInt();
 
         // 입력값을 기반으로 Product 객체 생성
+        // prod_id 값은 임시로 설정
+        Product product = new Product(name, company, expiration, isAdult, price, stock);
+        ProductDAO productDAO = new ProductDAO();
+        productDAO.RegisterProduct(
+                product.getProdName(),
+                product.getCompany(),
+                product.getExpiration(),
+                product.isAdult(),
+                product.getPrice(),
+                product.getStock());
     }
 }
