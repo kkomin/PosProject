@@ -26,6 +26,7 @@ public class EmployeeService {
                         break;
                     case 2:
                         // 재고 확인 메서드 호출
+
                         break;
                     case 3:
                         // 제품 검색 메서드 호출
