@@ -3,6 +3,7 @@ package main;
 import dao.EmployeeDao;
 import dao.LoginLogDao;
 import model.LoginUser;
+import service.EmployeeService;
 
 import java.time.LocalDateTime;
 import java.util.Scanner;
@@ -39,8 +40,8 @@ public class LoginManager {
                 loginUser.setLoginTime(LocalDateTime.now().withNano(0));
                 System.out.println("현재 시간은 " + loginUser.getLoginTime());
 
-
                 // 로그인 반복문 종료
+                EmployeeService.showMenu();
                 break;
             }
             else {
