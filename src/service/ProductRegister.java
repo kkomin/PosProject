@@ -18,5 +18,12 @@ public class ProductRegister {
         String deadline = sc.nextLine();
         System.out.print("19금 여부 (Y/N) : ");
         String adult = sc.nextLine();
+        System.out.print("가격 : ");
+        int price = sc.nextInt();
+        // 수량은 최소 10개 입력받는 예외처리 필요
+        System.out.print("수량 :");
+        int stock = sc.nextInt();
+
+        // 입력값을 기반으로 Product 객체 생성
     }
 }
