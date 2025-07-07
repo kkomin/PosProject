@@ -32,6 +32,10 @@ public class ProductService {
     }
 
     // 해당 제품이 19금인지 확인
+    public boolean isAdult(Product product) {
+        // '1'이면 성인으로 true 반환
+        return product.isAdult() == '1';
+    }
 
     // 재고 차감 처리
 }
