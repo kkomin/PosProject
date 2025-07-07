@@ -16,7 +16,7 @@ public class SearchProductDAO {
     // 제품명으로 검색
     public void SearchName(String name) {
         String searchNameSql = """
-            SELECT * FROM PRODUCTS WHERE PROD_NAME LIKE ?
+            SELECT * FROM PRODUCTS WHERE UPPER(PROD_NAME) LIKE ?
             """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(searchNameSql)) {
@@ -45,7 +45,7 @@ public class SearchProductDAO {
     // 회사명으로 검색
     public void SearchCompany(String company) {
         String searchCompanySql = """
-                SELECT * FROM PRODUCTS WHERE COMPANY LIKE ?
+                SELECT * FROM PRODUCTS WHERE UPPER(COMPANY) LIKE ?
                 """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(searchCompanySql)){
@@ -62,12 +62,13 @@ public class SearchProductDAO {
                 int stock = resultSet.getInt("STOCK");
                 System.out.printf("제품명 : %s | 회사 %s | 가격 : %,d | 수량 : %d\n", prodName, prodCompany, price, stock);
             }
+            System.out.println("\n");
+
             if(!found) {
                 System.out.println("검색 결과가 존재하지 않습니다.\n");
             }
         } catch (SQLException e) {
             System.out.println("SEARCH COMPANY SELECT 오류\n" + e.getMessage());
         }
-
     }
 }
