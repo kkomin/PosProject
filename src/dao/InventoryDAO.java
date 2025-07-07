@@ -14,10 +14,18 @@ public class InventoryDAO {
             SELECT * FROM PRODUCTS
             """;
 
+    // INVENTORY_LOGS에 기록 추가
+    // id -> sequence로 순차적으로 생성
+    private final String inventoryLogSql = """
+            INSERT INTO INVENTORY_LOGS(LOG_ID, PROD_ID, QUANTITY, ARRIVAL_DATE)
+            VALUES (INVENTORY_LOGS_ID_SEQ.NEXTVAL, ?, ?, SYSDATE)
+            """;
+
     public InventoryDAO(Connection connection) {
         this.connection = connection;
     }
 
+    // PRODUCT 재고 목록 조회 및 리스트에 담기
     public List<Product> inventory() {
         List<Product> productList = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(selectSql)){
@@ -45,4 +53,21 @@ public class InventoryDAO {
         }
         return productList;
     }
+
+    // 입고 기록 추가
+    public void addInventoryLog(int prodId, int quantity) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(inventoryLogSql)) {
+            // 파라미터 바인딩
+            preparedStatement.setInt(1, prodId);
+            preparedStatement.setInt(2, quantity);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("INVENTORY SQL 오류" + e.getMessage());
+        }
+    }
+
+
+    // 수량만큼 products의 재고 수량 증가
+
 }

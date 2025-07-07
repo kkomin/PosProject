@@ -28,6 +28,7 @@ public class InventoryService {
             int quantity = random.nextInt(10) + 1;
 
             // 현재 날짜도 포함해서 입고 기록 추가
+            inventoryDAO.addInventoryLog(selected.getProdId(), quantity);
 
             // PRODUCT의 STOCK도 수량만큼 증가
 
