@@ -7,6 +7,7 @@ import model.Product;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Random;
 
 // 무작위로 제품 선택 후 입고
 public class InventoryService {
@@ -15,6 +16,14 @@ public class InventoryService {
             InventoryDAO inventoryDAO = new InventoryDAO(connection);
             // inventory 리스트 가져오기
             List<Product> products = inventoryDAO.inventory();
+
+            // Random으로 products 하나 뽑기
+            // products -> ArrayList 형태 -> 인덱스 필요
+            Random random = new Random();
+            int index = random.nextInt(products.size());
+            Product selected = products.get(index);
+
+            // 입고 처리 (재고 증가 + inventory_logs 추가)
         }
         catch (SQLException e) {
             System.out.println("Inventory 연결 오류" + e.getMessage());
