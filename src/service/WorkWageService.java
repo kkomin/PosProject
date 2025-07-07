@@ -25,11 +25,13 @@ public class WorkWageService {
             // 근무 시간 분 단위로 계산
             // 일급 계산 = 시급 / 60 * 근무시간(분)
             long workMinutes = Duration.between(loginTime, currentLogout).toMinutes();   // 일한 시간
-            long dailyWage = wage / 60 * workMinutes;
+            long dailyWage = Math.round((float) wage / 60) * workMinutes;
 
             // worklogdao에 업데이트
 
             // 콘솔에 일급 출력
+            System.out.printf("총 근무 시간 : %d 분\n", workMinutes);
+            System.out.printf("오늘의 일급 : %,d 원\n\n", dailyWage);
         } catch (SQLException e) {
             System.out.println("시급 계산 connection 오류" + e.getMessage());
         }
