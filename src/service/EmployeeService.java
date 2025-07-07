@@ -1,6 +1,7 @@
 package service;
 
 import dao.GetProductsDAO;
+import dao.InventoryDAO;
 import db.ConnectionDB;
 
 import java.sql.Connection;
@@ -39,6 +40,8 @@ public class EmployeeService {
                             break;
                         case 4:
                             // 입고 처리 메서드 호출
+                            InventoryService inventoryService = new InventoryService();
+                            inventoryService.randomInventory();
                             break;
                         case 5:
                             // 결제 메서드 호출

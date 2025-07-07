@@ -34,8 +34,8 @@ public class InventoryService {
             inventoryDAO.addProducts(selected.getProdId(), quantity);
 
             // 입고한 정보 출력
-            System.out.printf("\n[%s]가 [%d개] 입고 되었습니다.", selected.getProdName(), quantity);
-            System.out.printf("==== [%s]의 현재 재고 : [%d개] ====\n", selected.getProdName(), selected.getStock() + quantity);
+            System.out.printf("\n[%s]가 [%d개] 입고 되었습니다.\n", selected.getProdName(), quantity);
+            System.out.printf("==== [%s]의 현재 재고 : [%d개] ====\n\n", selected.getProdName(), selected.getStock() + quantity);
         }
         catch (SQLException e) {
             System.out.println("Inventory 연결 오류" + e.getMessage());
