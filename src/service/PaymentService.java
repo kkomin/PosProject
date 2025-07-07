@@ -1,6 +1,5 @@
 package service;
 
-import java.util.Currency;
 import java.util.Scanner;
 
 // 결제 방식 처리 (카드 or. 현금 구분, 잔고 갱신)
@@ -11,6 +10,7 @@ public class PaymentService {
     // 결제 처리
     public void proccessPay(int totalPrice) {
         Scanner sc = new Scanner(System.in);
+        System.out.printf("현재 잔고 : %,d 원", INITIAL);
         System.out.println("결제 방법 (카드 : 1 / 현금 : 2)");
         System.out.print("선택 : ");
         int method = sc.nextInt();
@@ -43,18 +43,19 @@ public class PaymentService {
         }
 
         // 카드 결제
-        if(current >= totalPrice) {
-            current -= totalPrice;
-            System.out.printf("결제 금액 : %,d 원", totalPrice);
-            System.out.println("결제가 완료되었습니다.\n");
-            System.out.printf("현재 잔액 : %,d 원", current);
-        } else {
-            System.out.println("잔액이 부족합니다.\n");
+        current += totalPrice;
+        System.out.printf("결제 금액 : %,d 원", totalPrice);
+        System.out.println("결제가 완료되었습니다.\n");
+
+        System.out.printf("현재 잔고 : %,d 원", current);
         }
     }
 
     // 현금 결제 처리
     public void cashPayment(int totalPrice) {
+        Scanner sc = new Scanner(System.in);
 
+        // 현금 금액 받기
+        System.out.println();
     }
 }
