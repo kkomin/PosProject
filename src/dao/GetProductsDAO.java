@@ -27,8 +27,8 @@ public class GetProductsDAO {
                 int prodStock = resultSet.getInt("STOCK");
 
                 System.out.printf("%s : %s\t(%d개)\n", prodName, "*".repeat(Math.max(0, prodStock)),prodStock);
-                System.out.println("\n");
             }
+            System.out.println("\n");
 
         } catch (SQLException e) {
             System.out.println("PRODUCTS SQL 오류" + e.getMessage());

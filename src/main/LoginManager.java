@@ -42,7 +42,7 @@ public class LoginManager {
 
                     // 시간은 초까지만 저장
                     loginUser.setLoginTime(LocalDateTime.now().withNano(0));
-                    System.out.printf("출근 시간 : %s\n", loginUser.getLoginTime());
+                    System.out.printf("출근 시간 : %s\n\n", loginUser.getLoginTime());
 
                     // 로그인 반복문 종료
                     EmployeeService.showMenu();
