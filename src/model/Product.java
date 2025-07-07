@@ -46,7 +46,7 @@ public class Product {
         return expiration;
     }
 
-    public Character isAdult() {
+    public Character getIsAdult() {
         return isAdult;
     }
 

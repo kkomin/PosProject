@@ -82,7 +82,7 @@ public class ProductRegister {
                 product.getProdName(),
                 product.getCompany(),
                 product.getExpiration(),
-                product.isAdult(),
+                product.getIsAdult(),
                 product.getPrice(),
                 product.getStock());
     }
