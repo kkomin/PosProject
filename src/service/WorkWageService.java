@@ -15,9 +15,10 @@ public class WorkWageService {
             WorkLogDAO workLogDAO = new WorkLogDAO(connection);
 
             // 해당 사원의 가장 최근 login_log 조회
+            int id = user.getEmpId();       // emp_id(PK) 가져오기
+            workLogDAO.LastLoginLog(user.getEmpId());
 
             // 계산에 필요한 정보 가져오기
-            int id = user.getEmpId();       // emp_id(PK) 가져오기
             LocalDateTime loginTime = user.getLoginTime();  // 로그인한 시간
             LocalDateTime currentLogout = LocalDateTime.now();  // 현재 시간
             int wage = user.getHourlyWage();    // 시급 조회
@@ -28,6 +29,7 @@ public class WorkWageService {
             long dailyWage = Math.round((float) wage / 60) * workMinutes;
 
             // worklogdao에 업데이트
+            int logId = user.getLoginLogsId();
 
             // 콘솔에 일급 출력
             System.out.printf("총 근무 시간 : %d 분\n", workMinutes);
