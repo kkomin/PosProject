@@ -36,6 +36,8 @@ public class EmployeeService {
                             break;
                         case 3:
                             // 제품 검색 메서드 호출
+                            SearchService search = new SearchService();
+                            search.searchProducts();
                             break;
                         case 4:
                             // 입고 처리 메서드 호출
