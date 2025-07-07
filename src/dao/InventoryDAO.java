@@ -2,10 +2,7 @@ package dao;
 
 import model.Product;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class InventoryDAO {
     private Connection connection;
@@ -24,7 +21,17 @@ public class InventoryDAO {
             ResultSet resultSet = preparedStatement.executeQuery();
             // 전체 목록 조회
             while(resultSet.next()) {
+                // PRODUCTS -> prod_id, prod_name, company, expiration, is_adult, price, stock
+                int id = resultSet.getInt("prod_id");
+                String name = resultSet.getString("prod_name");
+                String company = resultSet.getString("company");
+                Date exp = resultSet.getDate("expiration");
+                char adult = resultSet.getString("is_adult").charAt(0);
+                int price = resultSet.getInt("price");
+                int stock = resultSet.getInt("stock");
+
                 // 제품 객체 생성
+                Product product = new Product(id, name, company, exp, adult, price, stock);
             }
 
         } catch (SQLException e) {
