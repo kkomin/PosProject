@@ -8,6 +8,7 @@ import model.Product;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 // 제품 선택 기능 (유통기한 체크, 재고 감소)
@@ -25,6 +26,10 @@ public class ProductService {
     }
 
     // 유통기한 비교
+    public boolean isExpired(Product product) {
+        Date today = new Date(System.currentTimeMillis());
+        return product.getExpiration().before(today);
+    }
 
     // 해당 제품이 19금인지 확인
 
