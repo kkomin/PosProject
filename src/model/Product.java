@@ -23,6 +23,17 @@ public class Product {
         this.stock = stock;
     }
 
+    // 등록된 제품 정보 조회용 생성자
+    public Product(int prodId, String prodName, String company, Date expiration, Character isAdult, int price, int stock) {
+        this.prodId = prodId;
+        this.prodName = prodName;
+        this.company = company;
+        this.expiration = expiration;
+        this.isAdult = isAdult;
+        this.price = price;
+        this.stock = stock;
+    }
+
     public String getProdName() {
         return prodName;
     }
@@ -47,4 +58,7 @@ public class Product {
         return stock;
     }
 
+    public int getProdId() {
+        return prodId;
+    }
 }
