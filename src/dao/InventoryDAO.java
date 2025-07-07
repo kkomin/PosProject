@@ -3,6 +3,8 @@ package dao;
 import model.Product;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class InventoryDAO {
     private Connection connection;
@@ -19,6 +21,7 @@ public class InventoryDAO {
     public void inventory() {
         try (PreparedStatement preparedStatement = connection.prepareStatement(selectSql)){
             ResultSet resultSet = preparedStatement.executeQuery();
+            List<Product> productList = new ArrayList<>();
             // 전체 목록 조회
             while(resultSet.next()) {
                 // PRODUCTS -> prod_id, prod_name, company, expiration, is_adult, price, stock
@@ -32,6 +35,8 @@ public class InventoryDAO {
 
                 // 제품 객체 생성
                 Product product = new Product(id, name, company, exp, adult, price, stock);
+                // 리스트에 추가
+                productList.add(product);
             }
 
         } catch (SQLException e) {
