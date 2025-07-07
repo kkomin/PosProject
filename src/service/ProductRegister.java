@@ -39,18 +39,18 @@ public class ProductRegister {
         }
 
 
-        boolean isAdult;
+        char isAdult;
         while(true) {
             System.out.print("19금 여부 (Y/N) : ");
-            String adult = sc.nextLine().trim();
+            String adult = sc.nextLine().trim().toUpperCase();
 
             // 성인 여부 입력 시 true, false로 변경
-            if(adult.equals("y") || adult.equals("Y")) {
-                isAdult = true;
+            if(adult.equals("Y")) {
+                isAdult = '1';
                 break;
             }
-            else if (adult.equals("n") || adult.equals("N")) {
-                isAdult = false;
+            else if (adult.equals("N")) {
+                isAdult = '0';
                 break;
             }
             else {
@@ -76,7 +76,6 @@ public class ProductRegister {
         }
 
         // 입력값을 기반으로 Product 객체 생성
-        // prod_id 값은 임시로 설정
         Product product = new Product(name, company, expiration, isAdult, price, stock);
         ProductDAO productDAO = new ProductDAO();
         productDAO.registerProduct(
