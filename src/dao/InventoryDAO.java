@@ -21,6 +21,11 @@ public class InventoryDAO {
             VALUES (INVENTORY_LOGS_ID_SEQ.NEXTVAL, ?, ?, SYSDATE)
             """;
 
+    // PRODUCTS의 STOCK 수량 변경
+    private final String addProductSql = """
+            UPDATE PRODUCTS SET STOCK = STOCK + ? WHERE PROD_ID = ?
+            """;
+
     public InventoryDAO(Connection connection) {
         this.connection = connection;
     }
@@ -63,11 +68,21 @@ public class InventoryDAO {
 
             preparedStatement.executeUpdate();
         } catch (SQLException e) {
-            System.out.println("INVENTORY SQL 오류" + e.getMessage());
+            System.out.println("INVENTORY INSERT 오류" + e.getMessage());
         }
     }
 
 
     // 수량만큼 products의 재고 수량 증가
+    public void addProducts(int prodId, int stock) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(addProductSql)) {
+            // 파라미터 바인딩
+            preparedStatement.setInt(1, stock);
+            preparedStatement.setInt(2, prodId);
 
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("PRODUCTS UPDATE 오류" + e.getMessage());
+        }
+    }
 }

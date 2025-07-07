@@ -31,8 +31,10 @@ public class InventoryService {
             inventoryDAO.addInventoryLog(selected.getProdId(), quantity);
 
             // PRODUCT의 STOCK도 수량만큼 증가
+            inventoryDAO.addProducts(selected.getProdId(), selected.getStock());
 
             // 입고한 정보 출력
+            System.out.printf("\n[%s]가 [%d개] 입고 되었습니다.\n", selected.getProdName(), quantity);
         }
         catch (SQLException e) {
             System.out.println("Inventory 연결 오류" + e.getMessage());
