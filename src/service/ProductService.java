@@ -1,6 +1,7 @@
 package service;
 
 import dao.InventoryDAO;
+import dao.ProductDAO;
 import db.ConnectionDB;
 import model.Product;
 
@@ -45,9 +46,14 @@ public class ProductService {
     }
 
     // 재고 차감 처리 -> 제품 재고 수량 줄이기 (재고가 부족하면 판매 막기)
-    public boolean reduceStock(int selectedId) {
+    public boolean reduceStock(Product product, int quantity) {
         // DB에서 재고 현황 (stock) 조회
+        ProductDAO productDAO = new ProductDAO();
+        boolean isReduced = productDAO.reduceProduct(product.getProdId(), quantity);
 
-        return false;
+        if(!isReduced){
+            System.out.println("재고가 부족하여 판매가 불가능합니다.\n");
+        }
+        return isReduced;
     }
 }

@@ -6,17 +6,6 @@ import java.sql.*;
 
 // 등록하는 제품 -> DB에 추가 (insert)
 public class ProductDAO {
-    // 제품 등록 sql
-    public final String insertProduct = """
-            INSERT INTO PRODUCTS(PROD_ID, PROD_NAME, COMPANY, EXPIRATION, IS_ADULT, PRICE, STOCK)
-            VALUES (prod_id_seq.nextval, ?, ?, ?, ?, ?, ?)
-            """;
-
-    // 등록한 제품 prod_id 받아오는 sql
-//    public final String getProduct = """
-//            SELECT PROD_ID_SEQ.CURRVAL FROM DUAL
-//            """;
-
     private Connection connection;
 
     public ProductDAO() {
@@ -28,6 +17,12 @@ public class ProductDAO {
     }
 
     public void registerProduct(String name, String company, Date expiration, Character isAdult, int price, int stock) {
+        // 제품 등록 sql
+        String insertProduct = """
+            INSERT INTO PRODUCTS(PROD_ID, PROD_NAME, COMPANY, EXPIRATION, IS_ADULT, PRICE, STOCK)
+            VALUES (prod_id_seq.nextval, ?, ?, ?, ?, ?, ?)
+            """;
+
         // PreparedStatement 자동으로 닫기
         try (PreparedStatement preparedStatement = connection.prepareStatement(insertProduct)) {
             // 파라미터 바인딩
@@ -51,17 +46,31 @@ public class ProductDAO {
         }
     }
 
-//    public int getProductId() {
-//        try (PreparedStatement preparedStatement = connection.prepareStatement(getProduct)) {
-//            ResultSet resultSet = preparedStatement.executeQuery();
-//
-//            if(resultSet.next()) {
-//                return resultSet.getInt(1);
-//            }
-//
-//        } catch (SQLException e) {
-//            throw new RuntimeException(e);
-//        }
-//        return -1;
-//    }
+    // 주문 갯수만큼 재고 수량 감소
+    public boolean reduceProduct(int prodId, int quantity) {
+        String reduceSql = """
+                UPDATE PRODUCTS
+                SET STOCK = STOCK - ?
+                WHERE PROD_ID = ? AND STOCK >= ?
+                """;
+
+        try ( PreparedStatement preparedStatement = connection.prepareStatement(reduceSql) ) {
+            // 파라미터 바인딩
+            // 차감할 수량
+            preparedStatement.setInt(1, quantity);
+            // 제품 id
+            preparedStatement.setInt(2, prodId);
+            // 차감 가능한 최대 수량
+            preparedStatement.setInt(3, quantity);
+            int update = preparedStatement.executeUpdate();
+            if(update == 0) {
+                System.out.println("재고가 부족하여 구매할 수 없습니다.\n");
+                return false;
+            }
+            return true;
+        } catch (SQLException e) {
+            System.out.println("재고 수량 감소 UPDATE 오류" + e.getMessage());
+            return false;
+        }
+    }
 }
