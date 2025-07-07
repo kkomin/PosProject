@@ -45,7 +45,7 @@ public class LoginManager {
                     System.out.printf("출근 시간 : %s\n\n", loginUser.getLoginTime());
 
                     // 로그인 반복문 종료
-                    EmployeeService.showMenu();
+                    EmployeeService.showMenu(loginUser);
                     break;
                 }
                 else {

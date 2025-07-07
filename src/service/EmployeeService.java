@@ -2,13 +2,14 @@ package service;
 
 import dao.GetProductsDAO;
 import db.ConnectionDB;
+import model.LoginUser;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Scanner;
 
 public class EmployeeService {
-    public static void showMenu() {
+    public static void showMenu(LoginUser user) {
         Scanner sc = new Scanner(System.in);
         try (Connection connection = ConnectionDB.getConnectionDB()){
             while(true) {
@@ -52,6 +53,8 @@ public class EmployeeService {
                             break;
                         case 0:
                             // 퇴근 (일급 계산) 메서드 호출
+                            WorkWageService workService = new WorkWageService();
+                            workService.logout(user);
                             return;
                         default:
                             System.out.println("잘못 입력하셨습니다.\n");
