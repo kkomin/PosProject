@@ -26,12 +26,7 @@ public class GetProductsDAO {
                 String prodName = resultSet.getString("PROD_NAME");
                 int prodStock = resultSet.getInt("STOCK");
 
-                StringBuilder stars = new StringBuilder();
-                for (int i = 0; i < prodStock; i++) {
-                    stars.append("*");
-                }
-
-                System.out.printf("%s : %s\t(%d개)\n", prodName, stars ,prodStock);
+                System.out.printf("%s : %s\t(%d개)\n", prodName, "*".repeat(Math.max(0, prodStock)),prodStock);
                 System.out.println("\n");
             }
 
