@@ -37,5 +37,9 @@ public class ProductService {
         return product.isAdult() == '1';
     }
 
-    // 재고 차감 처리
+    // 재고 차감 처리 -> 제품 재고 수량 줄이기 (재고가 부족하면 판매 막기)
+     public boolean reduceStock() {
+        // DB에서 재고 현황 (stock) 조회
+         return false;
+    }
 }
