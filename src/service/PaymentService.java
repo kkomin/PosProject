@@ -29,7 +29,6 @@ public class PaymentService {
         }
     }
 
-
     // 카드 결제 처리
     public void cardPayment(int totalPrice) {
         Scanner sc = new Scanner(System.in);
@@ -48,14 +47,29 @@ public class PaymentService {
         System.out.println("결제가 완료되었습니다.\n");
 
         System.out.printf("현재 잔고 : %,d 원", current);
-        }
     }
 
     // 현금 결제 처리
     public void cashPayment(int totalPrice) {
+
         Scanner sc = new Scanner(System.in);
 
         // 현금 금액 받기
-        System.out.println();
+        System.out.print("현금 금액 : ");
+        int cash = sc.nextInt();
+
+        if(cash >= totalPrice) {
+            int charge = cash - totalPrice;
+            System.out.println("현금 결제 완료\n");
+            System.out.printf("거스름돈 : %,d 원", charge);
+        }
+        else {
+            System.out.println("금액이 부족합니다.\n");
+        }
+    }
+
+    // 결제 후 잔액 반환
+    public int getCurrent() {
+        return current;
     }
 }
