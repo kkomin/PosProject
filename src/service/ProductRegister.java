@@ -76,7 +76,6 @@ public class ProductRegister {
         }
 
         // 입력값을 기반으로 Product 객체 생성
-        // prod_id 값은 임시로 설정
         Product product = new Product(name, company, expiration, isAdult, price, stock);
         ProductDAO productDAO = new ProductDAO();
         productDAO.registerProduct(

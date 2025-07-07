@@ -5,14 +5,14 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class getProductsDAO {
+public class GetProductsDAO {
     private final Connection connection;
 
     public final String getProductsSql = """
             SELECT PROD_ID, PROD_NAME, STOCK FROM PRODUCTS ORDER BY PROD_ID
             """;
 
-    public getProductsDAO(Connection conn) {
+    public GetProductsDAO(Connection conn) {
         this.connection = conn;
     }
 
@@ -31,7 +31,8 @@ public class getProductsDAO {
                     stars.append("*");
                 }
 
-                System.out.printf("%s : %s\t%d개", prodName, stars ,prodStock);
+                System.out.printf("%s : %s\t(%d개)\n", prodName, stars ,prodStock);
+                System.out.println("\n");
             }
 
         } catch (SQLException e) {
