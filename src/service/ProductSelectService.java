@@ -28,6 +28,10 @@ public class ProductSelectService {
         Product selectedProd = getSelectedProductId(prod);
 
         // 유통기한 확인
+        if(productService.isExpired(product)) {
+            System.out.println("이 제품은 유통기한이 지났습니다.\n");
+            return;
+        }
 
         // 성인 인증 체크
 
