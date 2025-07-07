@@ -20,9 +20,11 @@ public class PaymentService {
         switch(method) {
             case 1 :
                 // 카드 선택
+                cardPayment(totalPrice);
                 break;
             case 2:
                 // 현금 선택
+                cashPayment(totalPrice);
                 break;
             default:
                 System.out.println("잘못된 결제 방법 입니다.\n");
@@ -51,7 +53,6 @@ public class PaymentService {
 
     // 현금 결제 처리
     public void cashPayment(int totalPrice) {
-
         Scanner sc = new Scanner(System.in);
 
         // 현금 금액 받기
