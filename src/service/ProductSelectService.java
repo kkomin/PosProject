@@ -13,13 +13,15 @@ import java.util.Scanner;
 public class ProductSelectService {
     private final ProductService productService;
     private final CalculateService calculateService;
+    private final PaymentService paymentService;
 
-    public ProductSelectService(ProductService productService, CalculateService calculateService) {
+    public ProductSelectService(ProductService productService, CalculateService calculateService, PaymentService paymentService) {
         this.productService = productService;
         this.calculateService = calculateService;
+        this.paymentService = paymentService;
     }
 
-    public void selectProduct(Product product) {
+    public void selectProduct() {
         Scanner sc = new Scanner(System.in);
 
         // 제품 목록 출력
@@ -37,14 +39,15 @@ public class ProductSelectService {
             return;
         }
 
+
         // 유통기한 확인
-        if(productService.isExpired(product)) {
+        if(productService.isExpired(selectedProd)) {
             System.out.println("이 제품은 유통기한이 지났습니다.\n");
             return;
         }
 
         // 성인 인증 체크
-        if(productService.isAdult(product)) {
+        if(productService.isAdult(selectedProd)) {
             System.out.println("성인 제품입니다.");
             System.out.print("성인입니까? (Y / N) : ");
             String answer = sc.nextLine().trim().toUpperCase();
@@ -65,7 +68,7 @@ public class ProductSelectService {
 
         // 재고 차감
         if(productService.reduceStock(selectedProd, inputAmount)) {
-            System.out.println("구매가 완료되었습니다.\n");
+            paymentService.proccessPay(total);
         } else {
             System.out.println("구매가 취소되었습니다.\n");
         }
