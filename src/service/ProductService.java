@@ -1,8 +1,28 @@
 package service;
 
+import dao.InventoryDAO;
+import dao.ProductDAO;
+import db.ConnectionDB;
+import model.Product;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
 // 제품 선택 기능 (유통기한 체크, 재고 감소)
 public class ProductService {
+
     // DB에서 제품 목록 출력
+    public List<Product> getAllProducts() {
+        try (Connection connection = ConnectionDB.getConnectionDB()){
+            InventoryDAO inventoryDAO = new InventoryDAO(connection);
+            return inventoryDAO.inventory();
+        } catch (SQLException e) {
+            System.out.println("제품 전체 목록 조회 중 오류 발생" + e.getMessage());
+        }
+        return new ArrayList<>();
+    }
 
     // 유통기한 비교
 
