@@ -1,7 +1,6 @@
 package service;
 
 import dao.InventoryDAO;
-import dao.ProductDAO;
 import db.ConnectionDB;
 import model.Product;
 
@@ -12,9 +11,16 @@ import java.util.Scanner;
 
 // 사용자 주문 처리
 public class ProductSelectService {
+    private final ProductService productService;
+    private final CalculateService calculateService;
+
+    public ProductSelectService(ProductService productService, CalculateService calculateService) {
+        this.productService = productService;
+        this.calculateService = calculateService;
+    }
+
     public void selectProduct(Product product) {
         Scanner sc = new Scanner(System.in);
-        ProductService productService = new ProductService();
 
         // 제품 목록 출력
         productService.getAllProducts();
@@ -26,6 +32,10 @@ public class ProductSelectService {
 
         // 선택한 제품 정보 가져오기
         Product selectedProd = getSelectedProductId(prod);
+        if (selectedProd == null) {
+            System.out.println("해당 상품은 존재하지 않습니다.\n");
+            return;
+        }
 
         // 유통기한 확인
         if(productService.isExpired(product)) {
@@ -34,12 +44,31 @@ public class ProductSelectService {
         }
 
         // 성인 인증 체크
+        if(productService.isAdult(product)) {
+            System.out.println("성인 제품입니다.");
+            System.out.print("성인입니까? (Y / N) : ");
+            String answer = sc.nextLine().trim().toUpperCase();
+
+            if(answer.equals("N")) {
+                System.out.println("성인 제품은 성인만 구매가 가능합니다.\n");
+            }
+        }
 
         // 수량 입력
+        System.out.println("구매 수량 : ");
+        int inputAmount = sc.nextInt();
+        sc.nextLine();
 
         // 가격 계산
+        int total = calculateService.totalPrice(selectedProd, inputAmount);
+        System.out.printf("총액 : %,d 원", total);
 
         // 재고 차감
+        if(productService.reduceStock(selectedProd, inputAmount)) {
+            System.out.println("구매가 완료되었습니다.\n");
+        } else {
+            System.out.println("구매가 취소되었습니다.\n");
+        }
     }
 
     // 선택한 제품 값 반환하는 메서드
