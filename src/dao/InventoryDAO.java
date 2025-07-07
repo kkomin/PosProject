@@ -18,10 +18,10 @@ public class InventoryDAO {
         this.connection = connection;
     }
 
-    public void inventory() {
+    public List<Product> inventory() {
+        List<Product> productList = new ArrayList<>();
         try (PreparedStatement preparedStatement = connection.prepareStatement(selectSql)){
             ResultSet resultSet = preparedStatement.executeQuery();
-            List<Product> productList = new ArrayList<>();
             // 전체 목록 조회
             while(resultSet.next()) {
                 // PRODUCTS -> prod_id, prod_name, company, expiration, is_adult, price, stock
@@ -38,9 +38,11 @@ public class InventoryDAO {
                 // 리스트에 추가
                 productList.add(product);
             }
+            return productList;
 
         } catch (SQLException e) {
             System.out.println("INVENTORY SQL 구문 오류" + e.getMessage());
         }
+        return productList;
     }
 }
