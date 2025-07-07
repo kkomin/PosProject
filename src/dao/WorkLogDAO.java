@@ -20,7 +20,7 @@ public class WorkLogDAO {
                    JOIN employees e ON l.emp_id = e.emp_id
                    WHERE l.emp_id = ?
                    ORDER BY l.log_id DESC
-                   FETCH FIRST 1 ROWS ONLY;
+                   FETCH FIRST 1 ROWS ONLY
             """;
 
         try (PreparedStatement preparedStatement = connection.prepareStatement(lastLogSql)){
