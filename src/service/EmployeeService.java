@@ -1,7 +1,6 @@
 package service;
 
 import dao.GetProductsDAO;
-import dao.InventoryDAO;
 import db.ConnectionDB;
 
 import java.sql.Connection;

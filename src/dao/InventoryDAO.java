@@ -7,24 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InventoryDAO {
-    private Connection connection;
-
-    // 모든 제품 조회
-    private final String selectSql = """
-            SELECT * FROM PRODUCTS
-            """;
-
-    // INVENTORY_LOGS에 기록 추가
-    // id -> sequence로 순차적으로 생성
-    private final String inventoryLogSql = """
-            INSERT INTO INVENTORY_LOGS(LOG_ID, PROD_ID, QUANTITY, ARRIVAL_DATE)
-            VALUES (INVENTORY_LOGS_ID_SEQ.NEXTVAL, ?, ?, SYSDATE)
-            """;
-
-    // PRODUCTS의 STOCK 수량 변경
-    private final String addProductSql = """
-            UPDATE PRODUCTS SET STOCK = STOCK + ? WHERE PROD_ID = ?
-            """;
+    private final Connection connection;
 
     public InventoryDAO(Connection connection) {
         this.connection = connection;
@@ -33,6 +16,10 @@ public class InventoryDAO {
     // PRODUCT 재고 목록 조회 및 리스트에 담기
     public List<Product> inventory() {
         List<Product> productList = new ArrayList<>();
+        // 모든 제품 조회
+        String selectSql = """
+                SELECT * FROM PRODUCTS
+                """;
         try (PreparedStatement preparedStatement = connection.prepareStatement(selectSql)){
             ResultSet resultSet = preparedStatement.executeQuery();
             // 전체 목록 조회
@@ -61,6 +48,12 @@ public class InventoryDAO {
 
     // 입고 기록 추가
     public void addInventoryLog(int prodId, int quantity) {
+        // INVENTORY_LOGS에 기록 추가
+        // id -> sequence로 순차적으로 생성
+        String inventoryLogSql = """
+                INSERT INTO INVENTORY_LOGS(LOG_ID, PROD_ID, QUANTITY, ARRIVAL_DATE)
+                VALUES (INVENTORY_LOGS_ID_SEQ.NEXTVAL, ?, ?, SYSDATE)
+                """;
         try (PreparedStatement preparedStatement = connection.prepareStatement(inventoryLogSql)) {
             // 파라미터 바인딩
             preparedStatement.setInt(1, prodId);
@@ -75,6 +68,10 @@ public class InventoryDAO {
 
     // 수량만큼 products의 재고 수량 증가
     public void addProducts(int prodId, int stock) {
+        // PRODUCTS의 STOCK 수량 변경
+        String addProductSql = """
+                UPDATE PRODUCTS SET STOCK = STOCK + ? WHERE PROD_ID = ?
+                """;
         try (PreparedStatement preparedStatement = connection.prepareStatement(addProductSql)) {
             // 파라미터 바인딩
             preparedStatement.setInt(1, stock);
