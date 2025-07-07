@@ -16,7 +16,7 @@ public class WorkWageService {
 
             // 해당 사원의 가장 최근 login_log 조회
             int id = user.getEmpId();       // emp_id(PK) 가져오기
-            workLogDAO.LastLoginLog(user.getEmpId());
+            workLogDAO.LastLoginLog(id);
 
             // 계산에 필요한 정보 가져오기
             LocalDateTime loginTime = user.getLoginTime();  // 로그인한 시간
@@ -30,6 +30,7 @@ public class WorkWageService {
 
             // worklogdao에 업데이트
             int logId = user.getLoginLogsId();
+            workLogDAO.updateLogout(logId, currentLogout, workMinutes, (int) dailyWage);
 
             // 콘솔에 일급 출력
             System.out.printf("총 근무 시간 : %d 분\n", workMinutes);

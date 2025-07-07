@@ -43,5 +43,23 @@ public class WorkLogDAO {
     }
 
     // 로그아웃 시간 업데이트
+    public void updateLogout(int logId, LocalDateTime logoutTime, long workMinutes, int dailyWage) {
+        String logoutLog = """
+                UPDATE LOGIN_LOGS
+                SET LOGOUT_TIME = ?, WORK_MINUTES = ?, DAILY_WAGE = ?
+                WHERE LOG_ID = ?
+                """;
+
+        try (PreparedStatement preparedStatement = connection.prepareStatement(logoutLog)){
+            preparedStatement.setInt(1, logId);
+            preparedStatement.setDate(2, Date.valueOf(logoutTime.toLocalDate()));
+            preparedStatement.setLong(3, workMinutes);
+            preparedStatement.setInt(4, dailyWage);
+            preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {
+            System.out.println("LOGOUT UPDATE 오류" + e.getMessage());
+        }
+    }
 
 }
