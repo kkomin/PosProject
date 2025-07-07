@@ -34,7 +34,9 @@ public class WorkWageService {
 
             // 콘솔에 일급 출력
             System.out.printf("총 근무 시간 : %d 분\n", workMinutes);
-            System.out.printf("오늘의 일급 : %,d 원\n\n", dailyWage);
+//            System.out.printf("오늘의 일급 : %,d 원\n\n", dailyWage);
+
+            System.out.printf("%s 빠이~~ 오늘 일당은 %,d 원 입니다.\n", user.getUserName() ,dailyWage);
         } catch (SQLException e) {
             System.out.println("시급 계산 connection 오류" + e.getMessage());
         }
