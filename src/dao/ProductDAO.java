@@ -64,7 +64,6 @@ public class ProductDAO {
             preparedStatement.setInt(3, quantity);
             int update = preparedStatement.executeUpdate();
             if(update == 0) {
-                System.out.println("재고가 부족하여 구매할 수 없습니다.\n");
                 return false;
             }
             return true;

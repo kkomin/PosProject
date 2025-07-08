@@ -23,7 +23,7 @@ public class ProductService {
             else {
                 System.out.println("현재 등록된 제품 목록을 출력합니다.");
                 for(Product product : productList) {
-                    System.out.printf("ID : %d | 이름 : %s | 회사 : %s | 가격 : %,d | 재고 : %d",
+                    System.out.printf("ID : %d | 이름 : %s | 회사 : %s | 가격 : %,d | 재고 : %d\n",
                             product.getProdId(), product.getProdName(), product.getCompany(), product.getPrice(), product.getStock());
                 }
             }

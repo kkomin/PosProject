@@ -54,17 +54,18 @@ public class ProductSelectService {
 
             if(answer.equals("N")) {
                 System.out.println("성인 제품은 성인만 구매가 가능합니다.\n");
+                return;
             }
         }
 
         // 수량 입력
-        System.out.println("구매 수량 : ");
+        System.out.print("구매 수량 : ");
         int inputAmount = sc.nextInt();
         sc.nextLine();
 
         // 가격 계산
         int total = calculateService.totalPrice(selectedProd, inputAmount);
-        System.out.printf("총액 : %,d 원", total);
+        System.out.printf("총액 : %,d 원\n", total);
 
         // 재고 차감
         if(productService.reduceStock(selectedProd, inputAmount)) {
