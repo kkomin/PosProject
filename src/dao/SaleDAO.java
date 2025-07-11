@@ -1,6 +1,8 @@
 package dao;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class SaleDAO {
     private final Connection connection;
@@ -15,6 +17,11 @@ public class SaleDAO {
             INSERT INTO SALES(SALE_ID, SALE_DATE, EMP_ID, TOTAL_PRICE, PAYMENT_tYPE, ADULT_CHECK)
             VALUES(SALE_SEQ.NEXTVAL, SYSDATE, ?, ?, ?, ?)
             """;
+        try (PreparedStatement preparedStatement = connection.prepareStatement(insertSql)){
+            // 파라미터 바인딩
+        } catch (SQLException e) {
+            System.out.println("sale insert 오류 발생");
+        }
     }
 
     // sale_item 테이블에 insert
