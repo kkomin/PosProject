@@ -17,7 +17,7 @@ public class EmployeeService {
             CalculateService calculateService = new CalculateService();
             PaymentService paymentService = new PaymentService();
 
-            ProductSelectService productSelectService = new ProductSelectService(productService, calculateService, paymentService);
+            ProductSelectService productSelectService = new ProductSelectService(user, productService, calculateService, paymentService);
 
             while(true) {
                 System.out.println("1. 제품 등록");
