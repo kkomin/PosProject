@@ -48,7 +48,25 @@ public class SaleDAO {
     }
 
     // sale_item 테이블에 insert
-    public void insertSaleItem() {
+    public void insertSaleItem(int saleId, int prodId, int quantity, int subtotal) {
+        String insertSaleItemSql = """
+                INSERT INTO SALES_ITEM(ITEM_ID. SALE_ID, PROD_ID, QUANTITY, SUBTOTAL)
+                VALUES(SALE_ITEM_SEQ.NEXTVAL, ?, ?, ?, ?)
+                """;
 
+        try(PreparedStatement preparedStatement = connection.prepareStatement(insertSaleItemSql)) {
+            // 어떤 sale에 포함된 항목인지
+            preparedStatement.setInt(1, saleId);
+            // 어떤 상품?
+            preparedStatement.setInt(2, prodId);
+            // 몇 개 샀는지
+            preparedStatement.setInt(3, quantity);
+            // 개당 가격 * 수량
+            preparedStatement.setInt(4, subtotal);
+
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("SALES_ITEM INSERT 오류 발생" + e.getMessage());
+        }
     }
 }
