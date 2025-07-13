@@ -78,6 +78,9 @@ public class ProductSelectService {
             int empId = loginUser.getEmpId();
             String paymentType = paymentService.proccessPay(total);
             boolean isAdultCheck = selectedProd.getIsAdult() == '1';
+            // 결제 후 잔고 출력
+            int currentBalance = paymentService.getCurrent();
+            System.out.printf("결제 후 잔고 : %,d 원\n", currentBalance);
 
             saleService.processSale(
                     empId,

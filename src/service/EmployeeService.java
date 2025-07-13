@@ -3,7 +3,6 @@ package service;
 import dao.GetProductsDAO;
 import db.ConnectionDB;
 import model.LoginUser;
-import model.Product;
 
 import java.sql.Connection;
 import java.sql.SQLException;

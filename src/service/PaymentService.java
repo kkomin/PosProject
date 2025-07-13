@@ -53,7 +53,7 @@ public class PaymentService {
         System.out.printf("결제 금액 : %,d 원\n", totalPrice);
         System.out.println("결제가 완료되었습니다.\n");
 
-        System.out.printf("현재 잔고 : %,d 원\n\n", current);
+//        System.out.printf("현재 잔고 : %,d 원\n\n", current);
     }
 
     // 현금 결제 처리
