@@ -22,7 +22,7 @@ public class SaleService {
     }
 
     public void getSalesByDate(String date) {
-        Connection connection = null;
+        Connection connection;
 
         try {
             connection = ConnectionDB.getConnectionDB();
