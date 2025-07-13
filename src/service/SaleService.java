@@ -23,10 +23,11 @@ public class SaleService {
             int saleId = saleDAO.insertSale(empId, totalPrice, paymentType, isAdultCheck);
 
             // sales_item 테이블에 판매 항목 상세 저장
+            saleDAO.insertSaleItem(saleId, prodId, quantity, totalPrice);
 
             // 트랜잭션 커밋 (sale, sales_item 모든 쿼리 성공 시에만)
             connection.commit();
-            System.out.println("판매가 정상 처리되었습니다.\n");
+            System.out.println("판매가 B정상 처리되었습니다.\n");
 
         } catch (SQLException e) {
             System.out.println("SALE 연결 오류" + e.getMessage());
