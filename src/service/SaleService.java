@@ -5,9 +5,22 @@ import db.ConnectionDB;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Scanner;
 
 // 매출 기록 저장, 판매 내역 처리
 public class SaleService {
+    public void getSalesByDate(String date) {
+        Connection connection = null;
+
+        try {
+            connection = ConnectionDB.getConnectionDB();
+            SaleDAO saleDAO = new SaleDAO(connection);
+            saleDAO.getSalesByDate(date);
+        } catch(SQLException e) {
+            System.out.println("매출 조회 오류 발생" + e.getMessage());
+        }
+    }
+
     public void processSale(int empId, int prodId, int quantity, int totalPrice, String paymentType, boolean isAdultCheck) {
         Connection connection = null;
         // db 연결 생성
