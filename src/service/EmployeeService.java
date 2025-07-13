@@ -58,6 +58,8 @@ public class EmployeeService {
                             break;
                         case 6 :
                             // 매출 조회 메서드 호출
+                            SaleService saleService = new SaleService();
+                            saleService.saleService();
                             break;
                         case 0:
                             // 퇴근 (일급 계산) 메서드 호출
