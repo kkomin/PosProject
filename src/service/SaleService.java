@@ -9,6 +9,18 @@ import java.util.Scanner;
 
 // 매출 기록 저장, 판매 내역 처리
 public class SaleService {
+    public void saleService() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("조회하고 싶은 매출 날짜 (예) 20250713)");
+        System.out.print("입력 : ");
+        try {
+            String inputDate = sc.nextLine();
+            getSalesByDate(inputDate);
+        } catch (Exception e) {
+            System.out.println("올바르지 않는 형식입니다.\n");
+        }
+    }
+
     public void getSalesByDate(String date) {
         Connection connection = null;
 
