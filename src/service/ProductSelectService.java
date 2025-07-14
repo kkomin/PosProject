@@ -2,6 +2,7 @@ package service;
 
 import dao.InventoryDAO;
 import db.ConnectionDB;
+import model.LoginUser;
 import model.Product;
 
 import java.sql.Connection;
@@ -11,11 +12,13 @@ import java.util.Scanner;
 
 // 사용자 주문 처리
 public class ProductSelectService {
+    private final LoginUser loginUser;
     private final ProductService productService;
     private final CalculateService calculateService;
     private final PaymentService paymentService;
 
-    public ProductSelectService(ProductService productService, CalculateService calculateService, PaymentService paymentService) {
+    public ProductSelectService(LoginUser loginUser, ProductService productService, CalculateService calculateService, PaymentService paymentService) {
+        this.loginUser = loginUser;
         this.productService = productService;
         this.calculateService = calculateService;
         this.paymentService = paymentService;
@@ -38,7 +41,6 @@ public class ProductSelectService {
             System.out.println("해당 상품은 존재하지 않습니다.\n");
             return;
         }
-
 
         // 유통기한 확인
         if(productService.isExpired(selectedProd)) {
@@ -70,6 +72,24 @@ public class ProductSelectService {
         // 재고 차감
         if(productService.reduceStock(selectedProd, inputAmount)) {
             paymentService.proccessPay(total);
+
+            // 판매 기록 저장
+            SaleService saleService = new SaleService();
+            int empId = loginUser.getEmpId();
+            String paymentType = paymentService.proccessPay(total);
+            boolean isAdultCheck = selectedProd.getIsAdult() == '1';
+            // 결제 후 잔고 출력
+            int currentBalance = paymentService.getCurrent();
+            System.out.printf("결제 후 잔고 : %,d 원\n", currentBalance);
+
+            saleService.processSale(
+                    empId,
+                    selectedProd.getProdId(),
+                    inputAmount,
+                    total,
+                    paymentType,
+                    isAdultCheck
+            );
         } else {
             System.out.println("구매가 취소되었습니다.\n");
         }

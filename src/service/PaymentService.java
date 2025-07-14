@@ -8,7 +8,7 @@ public class PaymentService {
     private int current = INITIAL;
 
     // 결제 처리
-    public void proccessPay(int totalPrice) {
+    public String proccessPay(int totalPrice) {
         Scanner sc = new Scanner(System.in);
         System.out.printf("현재 잔고 : %,d 원\n", INITIAL);
         System.out.println("결제 방법 (카드 : 1 / 현금 : 2)\n");
@@ -16,19 +16,24 @@ public class PaymentService {
         int method = sc.nextInt();
         sc.nextLine();
 
+        String paySelected = null;
+
         // 결제 방법 선택
         switch(method) {
             case 1 :
                 // 카드 선택
                 cardPayment(totalPrice);
+                paySelected = "카드";
                 break;
             case 2:
                 // 현금 선택
                 cashPayment(totalPrice);
+                paySelected = "현금";
                 break;
             default:
                 System.out.println("잘못된 결제 방법 입니다.\n");
         }
+        return paySelected;
     }
 
     // 카드 결제 처리
@@ -48,7 +53,7 @@ public class PaymentService {
         System.out.printf("결제 금액 : %,d 원\n", totalPrice);
         System.out.println("결제가 완료되었습니다.\n");
 
-        System.out.printf("현재 잔고 : %,d 원\n\n", current);
+//        System.out.printf("현재 잔고 : %,d 원\n\n", current);
     }
 
     // 현금 결제 처리

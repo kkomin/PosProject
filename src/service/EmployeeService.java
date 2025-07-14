@@ -3,7 +3,6 @@ package service;
 import dao.GetProductsDAO;
 import db.ConnectionDB;
 import model.LoginUser;
-import model.Product;
 
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -17,7 +16,7 @@ public class EmployeeService {
             CalculateService calculateService = new CalculateService();
             PaymentService paymentService = new PaymentService();
 
-            ProductSelectService productSelectService = new ProductSelectService(productService, calculateService, paymentService);
+            ProductSelectService productSelectService = new ProductSelectService(user, productService, calculateService, paymentService);
 
             while(true) {
                 System.out.println("1. 제품 등록");
@@ -58,6 +57,8 @@ public class EmployeeService {
                             break;
                         case 6 :
                             // 매출 조회 메서드 호출
+                            SaleService saleService = new SaleService();
+                            saleService.saleService();
                             break;
                         case 0:
                             // 퇴근 (일급 계산) 메서드 호출
