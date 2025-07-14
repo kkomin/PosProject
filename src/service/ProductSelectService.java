@@ -65,6 +65,10 @@ public class ProductSelectService {
             System.out.print("구매 수량 : ");
             int inputAmount = sc.nextInt();
             sc.nextLine();
+            if(inputAmount == 0) {
+                System.out.println("수량은 1개 이상부터 가능합니다.\n");
+                continue;
+            }
 
             // 가격 계산
             int total = calculateService.totalPrice(selectedProd, inputAmount);
