@@ -94,7 +94,7 @@ public class SaleDAO {
 
                 System.out.printf("[판매번호] %d | [날짜정보] %s | [직원] %s | [결제] %s | [총액] %,d 원\n",
                         resultSet.getInt("sale_id"),
-                        resultSet.getInt("sale_date"),
+                        resultSet.getString("sale_date"),
                         resultSet.getString("user_name"),
                         resultSet.getString("payment_type"),
                         totalPrice
