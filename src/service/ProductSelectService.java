@@ -71,8 +71,6 @@ public class ProductSelectService {
 
         // 재고 차감
         if(productService.reduceStock(selectedProd, inputAmount)) {
-            paymentService.proccessPay(total);
-
             // 판매 기록 저장
             SaleService saleService = new SaleService();
             int empId = loginUser.getEmpId();
