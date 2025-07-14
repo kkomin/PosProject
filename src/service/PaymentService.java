@@ -6,11 +6,11 @@ import java.util.Scanner;
 public class PaymentService {
     private final int INITIAL = 1234000;
     private int current = INITIAL;
+    Scanner sc = new Scanner(System.in);
 
     // 결제 처리
     public String proccessPay(int totalPrice) {
-        Scanner sc = new Scanner(System.in);
-        System.out.printf("현재 잔고 : %,d 원\n", INITIAL);
+        System.out.printf("현재 잔고 : %,d 원\n", current);
         System.out.println("결제 방법 (카드 : 1 / 현금 : 2)\n");
         System.out.print("선택 : ");
         int method = sc.nextInt();
@@ -38,8 +38,6 @@ public class PaymentService {
 
     // 카드 결제 처리
     public void cardPayment(int totalPrice) {
-        Scanner sc = new Scanner(System.in);
-
         System.out.print("카드 번호 : ");
         String card = sc.nextLine();
 
@@ -58,21 +56,22 @@ public class PaymentService {
 
     // 현금 결제 처리
     public void cashPayment(int totalPrice) {
-        Scanner sc = new Scanner(System.in);
-
         // 현금 금액 받기
-        System.out.print("현금 금액 : ");
-        int cash = sc.nextInt();
+        while(true) {
+            System.out.print("현금 금액 : ");
+            int cash = sc.nextInt();
 
-        if(cash >= totalPrice) {
-            int charge = cash - totalPrice;
-            current -= charge;
-            System.out.println("현금 결제 완료\n");
-            System.out.printf("거스름돈 : %,d 원\n", charge);
-            System.out.printf("현재 잔고 : %,d 원\n", current);
-        }
-        else {
-            System.out.println("금액이 부족합니다.\n");
+            if(cash >= totalPrice) {
+                int charge = cash - totalPrice;
+                current -= charge;
+                System.out.println("현금 결제 완료\n");
+                System.out.printf("거스름돈 : %,d 원\n", charge);
+                System.out.printf("현재 잔고 : %,d 원\n", current);
+                break;
+            }
+            else {
+                System.out.println("금액이 부족합니다.\n");
+            }
         }
     }
 
