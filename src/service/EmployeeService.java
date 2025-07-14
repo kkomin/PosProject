@@ -31,6 +31,7 @@ public class EmployeeService {
                 int input;
                 try {
                     input = sc.nextInt();
+                    System.out.println(" ");
                     switch (input) {
                         case 1 :
                             // 제품 등록 메서드 호출

@@ -18,7 +18,7 @@ public class InventoryDAO {
         List<Product> productList = new ArrayList<>();
         // 모든 제품 조회
         String selectSql = """
-                SELECT * FROM PRODUCTS
+                SELECT * FROM PRODUCTS ORDER BY PROD_ID ASC
                 """;
         try (PreparedStatement preparedStatement = connection.prepareStatement(selectSql)){
             ResultSet resultSet = preparedStatement.executeQuery();

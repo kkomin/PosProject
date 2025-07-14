@@ -5,19 +5,27 @@ import db.ConnectionDB;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 // 매출 기록 저장, 판매 내역 처리
 public class SaleService {
     public void saleService() {
         Scanner sc = new Scanner(System.in);
-        System.out.println("조회하고 싶은 매출 날짜 (예) 20250713)");
-        System.out.print("입력 : ");
-        try {
-            String inputDate = sc.nextLine();
-            getSalesByDate(inputDate);
-        } catch (Exception e) {
-            System.out.println("올바르지 않는 형식입니다.\n");
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyyMMdd");
+
+        while(true) {
+            System.out.println("조회하고 싶은 매출 날짜 (예) 20250713)");
+            System.out.print("입력 : ");
+            String inputDate = sc.nextLine().trim();
+            try {
+                LocalDate.parse(inputDate, dateFormat);
+                getSalesByDate(inputDate);
+                break;
+            } catch (Exception e) {
+                System.out.println("올바르지 않는 형식입니다.\n");
+            }
         }
     }
 
@@ -52,7 +60,7 @@ public class SaleService {
 
             // 트랜잭션 커밋 (sale, sales_item 모든 쿼리 성공 시에만)
             connection.commit();
-            System.out.println("판매가 B정상 처리되었습니다.\n");
+            System.out.println("판매가 정상 처리되었습니다.\n");
 
         } catch (SQLException e) {
             System.out.println("SALE 연결 오류" + e.getMessage());

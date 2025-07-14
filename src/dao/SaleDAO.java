@@ -1,6 +1,5 @@
 package dao;
 
-import javax.xml.transform.Result;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -51,7 +50,7 @@ public class SaleDAO {
     // sale_item 테이블에 insert
     public void insertSaleItem(int saleId, int prodId, int quantity, int subtotal) {
         String insertSaleItemSql = """
-                INSERT INTO SALES_ITEM(ITEM_ID. SALE_ID, PROD_ID, QUANTITY, SUBTOTAL)
+                INSERT INTO SALES_ITEM(ITEM_ID, SALE_ID, PROD_ID, QUANTITY, SUBTOTAL)
                 VALUES(SALE_ITEM_SEQ.NEXTVAL, ?, ?, ?, ?)
                 """;
 
@@ -94,17 +93,17 @@ public class SaleDAO {
 
                 System.out.printf("[판매번호] %d | [날짜정보] %s | [직원] %s | [결제] %s | [총액] %,d 원\n",
                         resultSet.getInt("sale_id"),
-                        resultSet.getInt("sale_date"),
+                        resultSet.getString("sale_date"),
                         resultSet.getString("user_name"),
                         resultSet.getString("payment_type"),
                         totalPrice
                 );
             }
             // 판매 정보 객체들 출력 후 총합 출력
-            System.out.printf("\n총 매출 : %,d 원", totalSum);
+            System.out.printf("\n총 매출 : %,d 원\n\n", totalSum);
             // 해당 날짜의 매출을 찾을 수 없는 경우
             if(!found) {
-                System.out.println("해당 날짜에 매출 기록이 존재하지 않습니다.");
+                System.out.println("해당 날짜에 매출 기록이 존재하지 않습니다.\n");
             }
         } catch (SQLException e) {
             System.out.println("매출 조회 SQL 오류 발생" + e.getMessage());

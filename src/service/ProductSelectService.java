@@ -27,71 +27,77 @@ public class ProductSelectService {
     public void selectProduct() {
         Scanner sc = new Scanner(System.in);
 
-        // 제품 목록 출력
-        productService.getAllProducts();
+        while(true) {
+            // 제품 목록 출력
+            productService.getAllProducts();
 
-        // 사용자로부터 제품 선택 받기
-        System.out.print("구매할 상품(ID) : ");
-        int prod = sc.nextInt();
-        sc.nextLine();
+            // 사용자로부터 제품 선택 받기
+            System.out.print("구매할 상품(ID) : ");
+            int prod = sc.nextInt();
+            sc.nextLine();
 
-        // 선택한 제품 정보 가져오기
-        Product selectedProd = getSelectedProductId(prod);
-        if (selectedProd == null) {
-            System.out.println("해당 상품은 존재하지 않습니다.\n");
-            return;
-        }
-
-        // 유통기한 확인
-        if(productService.isExpired(selectedProd)) {
-            System.out.println("이 제품은 유통기한이 지났습니다.\n");
-            return;
-        }
-
-        // 성인 인증 체크
-        if(productService.isAdult(selectedProd)) {
-            System.out.println("성인 제품입니다.");
-            System.out.print("성인입니까? (Y / N) : ");
-            String answer = sc.nextLine().trim().toUpperCase();
-
-            if(answer.equals("N")) {
-                System.out.println("성인 제품은 성인만 구매가 가능합니다.\n");
-                return;
+            // 선택한 제품 정보 가져오기
+            Product selectedProd = getSelectedProductId(prod);
+            if (selectedProd == null) {
+                System.out.println("해당 상품은 존재하지 않습니다.\n");
+                continue;
             }
-        }
 
-        // 수량 입력
-        System.out.print("구매 수량 : ");
-        int inputAmount = sc.nextInt();
-        sc.nextLine();
+            // 유통기한 확인
+            if (productService.isExpired(selectedProd)) {
+                System.out.println("이 제품은 유통기한이 지났습니다.\n");
+                continue;
+            }
 
-        // 가격 계산
-        int total = calculateService.totalPrice(selectedProd, inputAmount);
-        System.out.printf("총액 : %,d 원\n", total);
+            // 성인 인증 체크
+            if (productService.isAdult(selectedProd)) {
+                System.out.println("성인 제품입니다.");
+                System.out.print("성인입니까? (Y / N) : ");
+                String answer = sc.nextLine().trim().toUpperCase();
 
-        // 재고 차감
-        if(productService.reduceStock(selectedProd, inputAmount)) {
-            paymentService.proccessPay(total);
+                if (answer.equals("N")) {
+                    System.out.println("성인 제품은 성인만 구매가 가능합니다.\n");
+                    continue;
+                }
+            }
 
-            // 판매 기록 저장
-            SaleService saleService = new SaleService();
-            int empId = loginUser.getEmpId();
-            String paymentType = paymentService.proccessPay(total);
-            boolean isAdultCheck = selectedProd.getIsAdult() == '1';
-            // 결제 후 잔고 출력
-            int currentBalance = paymentService.getCurrent();
-            System.out.printf("결제 후 잔고 : %,d 원\n", currentBalance);
+            // 수량 입력
+            System.out.print("구매 수량 : ");
+            int inputAmount = sc.nextInt();
+            sc.nextLine();
+            if(inputAmount == 0) {
+                System.out.println("수량은 1개 이상부터 가능합니다.\n");
+                continue;
+            }
 
-            saleService.processSale(
-                    empId,
-                    selectedProd.getProdId(),
-                    inputAmount,
-                    total,
-                    paymentType,
-                    isAdultCheck
-            );
-        } else {
-            System.out.println("구매가 취소되었습니다.\n");
+            // 가격 계산
+            int total = calculateService.totalPrice(selectedProd, inputAmount);
+            System.out.printf("총액 : %,d 원\n", total);
+
+            // 재고 차감
+            if (productService.reduceStock(selectedProd, inputAmount)) {
+                // 판매 기록 저장
+                SaleService saleService = new SaleService();
+                int empId = loginUser.getEmpId();
+                String paymentType = paymentService.proccessPay(total);
+                boolean isAdultCheck = selectedProd.getIsAdult() == '1';
+                // 결제 후 잔고 출력
+                int currentBalance = paymentService.getCurrent();
+                System.out.printf("결제 후 잔고 : %,d 원\n", currentBalance);
+
+                saleService.processSale(
+                        empId,
+                        selectedProd.getProdId(),
+                        inputAmount,
+                        total,
+                        paymentType,
+                        isAdultCheck
+                );
+                break;
+
+            } else {
+                System.out.println("구매가 취소되었습니다.\n");
+            }
         }
     }
 
