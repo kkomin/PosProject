@@ -35,7 +35,7 @@ public class SearchService {
                             break;
                         case 2:
                             // 회사명으로 검색
-                            System.out.print("\n검색할 제품명 : ");
+                            System.out.print("\n검색할 회사명 : ");
                             String company = sc.nextLine().trim().toUpperCase();
                             searchDAO.SearchCompany(company);
                             repeat = false;

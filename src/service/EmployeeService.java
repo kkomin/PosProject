@@ -27,6 +27,7 @@ public class EmployeeService {
                 System.out.println("6. 매출 조회");
                 System.out.println("0. 퇴근");
                 System.out.print("선택 : ");
+                System.out.println("\n");
 
                 int input;
                 try {

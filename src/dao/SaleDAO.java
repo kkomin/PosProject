@@ -101,10 +101,10 @@ public class SaleDAO {
                 );
             }
             // 판매 정보 객체들 출력 후 총합 출력
-            System.out.printf("\n총 매출 : %,d 원", totalSum);
+            System.out.printf("\n총 매출 : %,d 원\n\n", totalSum);
             // 해당 날짜의 매출을 찾을 수 없는 경우
             if(!found) {
-                System.out.println("해당 날짜에 매출 기록이 존재하지 않습니다.");
+                System.out.println("해당 날짜에 매출 기록이 존재하지 않습니다.\n");
             }
         } catch (SQLException e) {
             System.out.println("매출 조회 SQL 오류 발생" + e.getMessage());
