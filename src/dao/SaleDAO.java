@@ -51,7 +51,7 @@ public class SaleDAO {
     // sale_item 테이블에 insert
     public void insertSaleItem(int saleId, int prodId, int quantity, int subtotal) {
         String insertSaleItemSql = """
-                INSERT INTO SALES_ITEM(ITEM_ID. SALE_ID, PROD_ID, QUANTITY, SUBTOTAL)
+                INSERT INTO SALES_ITEM(ITEM_ID, SALE_ID, PROD_ID, QUANTITY, SUBTOTAL)
                 VALUES(SALE_ITEM_SEQ.NEXTVAL, ?, ?, ?, ?)
                 """;
 
