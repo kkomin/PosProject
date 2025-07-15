@@ -16,10 +16,29 @@ public class ProductRegister {
         System.out.println("=========================");
         System.out.println("제품 입력");
         System.out.println("=========================");
-        System.out.print("제품명 : ");
-        String name = sc.nextLine().trim();
-        System.out.print("제조사 : ");
-        String company = sc.nextLine().trim();
+
+        String name;
+        while(true) {
+            System.out.print("제품명 : ");
+            name = sc.nextLine().trim();
+
+            if(!name.isEmpty()) {
+                break;
+            } else {
+                System.out.println("제품명은 공백일 수 없습니다. 다시 입력해주세요.\n");
+            }
+        }
+        String company;
+        while(true) {
+            System.out.print("제조사 : ");
+            company = sc.nextLine().trim();
+
+            if(!company.isEmpty()) {
+                break;
+            } else {
+                System.out.println("제조사는 공백일 수 없습니다. 다시 입력해주세요.\n");
+            }
+        }
 
         // 유통기한 입력 시 형식 오류 예외처리
         Date expiration;
