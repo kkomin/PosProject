@@ -3,8 +3,6 @@
 사원 로그인을 통해 입장하여, 제품 관리, 결제, 매출 조회까지 처리할 수 있는 콘솔 기반 POS 시스템입니다.  
 Oracle DB와 Java JDBC를 활용하여 재고 관리부터 판매 내역 저장까지 전 과정이 연동됩니다.
 
-<br/>
-
 <details>
 <summary><strong>📋 소프트웨어 개발 요구사항 목록 </strong></summary>
 
@@ -49,6 +47,7 @@ Oracle DB와 Java JDBC를 활용하여 재고 관리부터 판매 내역 저장�
 
 </details>
 
+<br/>
 
 ## 📌 주요 기능
 
