@@ -2,7 +2,7 @@
 
 사원 로그인을 통해 입장하여, 제품 관리, 결제, 매출 조회까지 처리할 수 있는 콘솔 기반 POS 시스템입니다.  
 Oracle DB와 Java JDBC를 활용하여 재고 관리부터 판매 내역 저장까지 전 과정이 연동됩니다.
-
+<br/>
 
 ## 📌 주요 기능
 
@@ -32,20 +32,20 @@ Oracle DB와 Java JDBC를 활용하여 재고 관리부터 판매 내역 저장�
 - 총 매출 금액 및 상세 이력 조회
 - SQL Injection 방지를 위한 PreparedStatement 사용
 
----
+<br/>
 
 ## 🧠 시스템 흐름도 (순서도)
 
 > 전체 로직을 시각적으로 요약한 순서도는 추가 예정
 
----
+<br/>
 
 ## 🎥 시연 영상
 <img width="141" height="141" alt="image" src="https://github.com/user-attachments/assets/5ca86d6c-57b5-4119-9c1c-8e1d57fb6ede" />
 
 👉 [유튜브 시연 영상 보러가기](https://youtu.be/6yR4x5Z8FTA?si=SfxV2d8ZBIs-gXYl)  
 
----
+<br/>
 
 ## 🛠 사용 기술
 
@@ -57,7 +57,7 @@ Oracle DB와 Java JDBC를 활용하여 재고 관리부터 판매 내역 저장�
 | IDE          | IntelliJ IDEA / VSCode 등    |
 | Version Control | Git / GitHub              |
 
----
+<br/>
 
 ## 📂 프로젝트 구조
 
