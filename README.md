@@ -49,6 +49,17 @@ Oracle DB와 Java JDBC를 활용하여 재고 관리부터 판매 내역 저장�
 
 <br/>
 
+## 📊 DB 설계
+- JDBC 연결 → `DBUtil`, `ConnectionManager`
+- 로그인 기능 + 출근 기록 (`employees`, `login_logs`)
+- 제품 등록 / 재고 확인 / 입고 → `products`, `inventory_logs`
+- 판매 기능 → 제품 선택 → 결제 → `sales`, `sales_item`
+- 매출 조회 기능 (`sales`)
+- 종료 시 정산 (`login_logs`에 logout_time, 일당 계산)
+- 예외처리, 유통기한 체크, 19금 확인 등 부가 기능
+
+  <br/>
+
 ## 📌 주요 기능
 
 ### ✅ 사원 로그인
